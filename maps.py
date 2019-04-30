@@ -36,7 +36,7 @@ class Map():
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('background_images/initial.jpg')
         self.backgrounds = [pygame.image.load('background_images/deserto.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
-                            pygame.image.load('background_images/oceano.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
+                            pygame.image.load('background_images/rocha.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
                             pygame.image.load('background_images/metal.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
                             pygame.image.load('background_images/rocha.png').convert_alpha()]
         self.play =pygame.image.load('background_images/play.png')
@@ -59,7 +59,7 @@ class Map():
         elif self.level <= 10:
             self.spawnMonsters(1, self.images.changeImagesSize(self.images.getGrizImages(), (100, 100)), 20, True)
         elif self.level <= 15:
-            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getAquaringImages(), (100, 100)), 30, True)
+            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getAngryPenguinImages(), (100, 100)), 30, True)
         elif self.level <= 20:
             self.spawnMonsters(1, self.images.changeImagesSize(self.images.getStapoImages(), (100, 100)), 40, True)
         elif self.level <= 25:
@@ -113,7 +113,7 @@ class Map():
         elif self.level <= 10:
             self.spawnMonsters(self.quant, self.images.getMagmaringImages(), 2, False)
         elif self.level <= 15:
-            self.spawnMonsters(self.quant, self.images.getAquaringImages(), 3, False)
+            self.spawnMonsters(self.quant, self.images.getDevelingImages(), 3, False)
         elif self.level <= 20:
             self.spawnMonsters(self.quant, self.images.getStapoImages(), 4, False)
         elif self.level <= 25:

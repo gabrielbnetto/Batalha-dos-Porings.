@@ -32,6 +32,9 @@ class Images():
         self.griz = [[pygame.transform.scale(pygame.image.load('sprites_monsters/griz/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(6)],
                      [pygame.transform.scale(pygame.image.load('sprites_monsters/griz/left/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(6)]]
 
+        self.angry_penguin = [[pygame.transform.scale(pygame.image.load('sprites_monsters/angry_penguin/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(9)],
+                     [pygame.transform.scale(pygame.image.load('sprites_monsters/angry_penguin/left/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(9)]]
+
 
     def getPoringImages(self):
         return self.poring
@@ -62,6 +65,9 @@ class Images():
 
     def getGrizImages(self):
         return self.griz
+
+    def getAngryPenguinImages(self):
+        return self.angry_penguin
 
 
     def changeImagesSize(self, images, size):
