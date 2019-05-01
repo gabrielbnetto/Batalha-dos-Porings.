@@ -7,6 +7,7 @@ from monsters import Monster
 from players import Player
 from images_handler import Images
 from bullets import Bullet
+from bombs import Bomb
 
 SCREEN_HEIGHT = 700
 SCREEN_WIDTH = 1000
@@ -17,6 +18,7 @@ class Map():
         self.monsters = []
         self.allies = []
         self.bullets = []
+        self.bombs = []
         self.level = 1
         self.quant = 1
         self.player = Player((500-70/2, 350-70/2), pygame.image.load('sprites_player/sprite1_player_0.png'))
@@ -52,6 +54,9 @@ class Map():
             self.monsters.append(Monster((rd.randint(1070, 1070+(30*amount)), rd.randint(0, 700)), image, life, isBoss))
             #monsters spawn at bot side
             self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(770, 770+(30*amount))), image, life, isBoss))
+
+    def spawnBomb(self):
+        self.bombs.append(Bomb((rd.randint(30, 900), rd.randint(30, 600))))
 
     def spawnBoss(self):
         if self.level <= 5:
@@ -125,9 +130,11 @@ class Map():
             
         if rd.random() > 0.65:
             self.spawnAllies(1, self.images.getHeartImages(), 1)
+            self.spawnBomb()
 
         self.showGuiLevel = True
         self.start_time = time.time()
+
 
     def blitBackgroundMap(self):
         self.screen.blit(self.backgrounds[self.backgroundIndex], (-13, -30))
@@ -149,6 +156,14 @@ class Map():
                             self.allies.remove(allie)
                             self.player.addScore(-500)
                         self.player.shots.remove(shot)
+
+    def bombInteractions(self):
+        for bomb in self.bombs:
+            bomb.drawBomb(self.screen)
+            if self.player.is_collided_with(bomb):
+                print('collide')
+                self.bombs.remove(bomb)
+                pygame.mixer.Sound('audio/explosion.wav').play()
 
     def monstersInteractions(self):
         for monster in self.monsters:

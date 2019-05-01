@@ -32,6 +32,8 @@ while not game_map.windowClosed:
         game_map.monstersInteractions()
                         
         game_map.alliesInteractions()
+
+        game_map.bombInteractions()
                         
         game_map.checkEndOfLevel()
 
