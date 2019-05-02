@@ -107,8 +107,14 @@ class Player():
                 self.canSpawnBullets = False
 
     def showAmmoAmount(self, screen):
+        screen.blit(self.ammoImage, (60, 40))
+        j = 0
         for i in range(self.ammo):
-            screen.blit(self.ammoImage, (70 + (20*i), 40))
+            if(i < 10):
+                pygame.draw.rect(screen, (0, 0, 0), (78+j, 48 , 20, 7))
+                j+=21
+            if(i >= 10):
+                screen.blit(pygame.font.SysFont('arial', 20).render(" + " + str(self.ammo - 10), True, (0, 0, 0)), (290, 40)) 
 
     def addAmmo(self, amount):
         self.ammo += amount
