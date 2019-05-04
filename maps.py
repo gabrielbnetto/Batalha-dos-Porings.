@@ -3,6 +3,7 @@ import time
 import math
 import random as rd
 import Ranking
+import time
 from monsters import Monster
 from players import Player
 from images_handler import Images
@@ -29,14 +30,17 @@ class Map():
         self.win = False
         self.windowClosed = False
         self.initialScreen = True
+        self.intructionsScreen = False
         self.showGuiLevel = True
         self.ranking = []
         self.setRank = True
         self.start_time = time.time()
         self.backgroundIndex = 0
+        self.instrucStapoImage = 0
         self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('background_images/initial.jpg')
+        self.instructions = pygame.image.load('background_images/instructions.png')
         self.backgrounds = [pygame.image.load('background_images/deserto.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
                             pygame.image.load('background_images/rocha.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
                             pygame.image.load('background_images/metal.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
@@ -311,13 +315,35 @@ class Map():
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                print(pos)
                 if(pos[0] >= 250 and pos[0] <= 440 and pos[1] >= 650 and pos[1] <= 695):
                     self.initialScreen = False
                 if(pos[0] >= 485 and pos[0] <= 735 and pos[1] >= 650 and pos[1] <= 695):
                     self.initialScreen = False
+                    self.intructionsScreen = True
                 if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 650 and pos[1] <= 700):
                     self.pauseMusic()
                 if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
                     self.unpauseMusic()
 
+    def instructionScreen(self):
+        self.screen.blit(self.instructions, (0, 0))
+        if(self.instrucStapoImage == 13):
+            self.instrucStapoImage = 0
+        stapos = [pygame.transform.scale(pygame.image.load('sprites_monsters/stapo/right/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(13)]
+        self.screen.blit(stapos[self.instrucStapoImage],(450,350))
+        self.instrucStapoImage+=1
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.inGame = False
+                self.windowClosed = True
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if(pos[0] >= 410 and pos[0] <= 540 and pos[1] >= 630 and pos[1] <= 690):
+                    self.intructionsScreen = False
+                if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 650 and pos[1] <= 700):
+                    self.pauseMusic()
+                if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
+                    self.unpauseMusic()

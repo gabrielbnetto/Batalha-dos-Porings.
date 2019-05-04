@@ -20,6 +20,8 @@ while not game_map.windowClosed:
 
     if game_map.initialScreen:
         game_map.initalScreen()
+    elif game_map.intructionsScreen:
+        game_map.instructionScreen()    
     elif game_map.inGame:
         game_map.blitBackgroundMap()    
         
