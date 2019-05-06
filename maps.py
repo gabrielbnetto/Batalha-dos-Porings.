@@ -37,7 +37,7 @@ class Map():
         self.start_time = time.time()
         self.backgroundIndex = 0
         self.instrucStapoImage = 0
-        self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
+        self.winBackgroundImage = pygame.image.load('background_images/you_win.png')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('background_images/initial.jpg')
         self.instructions = pygame.image.load('background_images/instructions.png')
@@ -283,22 +283,21 @@ class Map():
             self.screen.blit(self.winBackgroundImage, (0, 0))
             self.screen.blit(self.play, (0, 680))
             self.screen.blit(self.pause, (25, 680))
+            self.screen.blit(pygame.font.SysFont('arial', 45).render("Parabéns " + Ranking.GetUsername(), True, (255, 255, 255)), (50, 600))
         else: 
             self.screen.blit(self.gameOverBackgroundImage, (0, 0))
             self.screen.blit(self.play, (0, 680))
             self.screen.blit(self.pause, (25, 680))
-
+            count = 1
+            for score in self.ranking:
+                self.screen.blit(pygame.font.SysFont('arial', 45).render(str(count) + " Lugar - " + score[1] + " - Level: " + score[2] + " - Score: " + score[3] , True, (255, 255, 255)), (150, 170 + (70*count)))
+                count += 1
+                if count > 5: break
         if self.setRank:    
             Ranking.SetRank(self.player.score, self.level, Ranking.GetUsername())
             Ranking.LoadRanking()
             self.ranking = Ranking.GetRanking()
             self.setRank = False
-
-        count = 1
-        for score in self.ranking:
-            self.screen.blit(pygame.font.SysFont('arial', 45).render(str(count) + " Lugar - " + score[1] + " - Level: " + score[2] + " - Score: " + score[3] , True, (255, 255, 255)), (150, 170 + (70*count)))
-            count += 1
-            if count > 5: break
 
         pygame.display.update()
 
