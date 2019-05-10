@@ -107,7 +107,7 @@ class Player():
                 self.canSpawnBullets = False
 
     def showAmmoAmount(self, screen):
-        screen.blit(self.ammoImage, (60, 40))
+        screen.blit(self.ammoImage, (65, 36))
         j = 0
         for i in range(self.ammo):
             if(i < 10):
