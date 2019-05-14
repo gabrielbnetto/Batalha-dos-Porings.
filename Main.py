@@ -1,7 +1,7 @@
 import pygame
 import time
 import Ranking
-from maps import Map
+from mapas import Map
 
 Ranking.SetUsername()
 pygame.init()
