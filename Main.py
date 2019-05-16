@@ -36,6 +36,8 @@ while not game_map.windowClosed:
         game_map.alliesInteractions()
 
         game_map.bombInteractions()
+
+        game_map.goldInteractons()
                         
         game_map.checkEndOfLevel()
 

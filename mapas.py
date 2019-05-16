@@ -9,6 +9,7 @@ from players import Player
 from images_handler import Images
 from municao import Bullet
 from bombs import Bomb
+from ouro import Gold
 
 SCREEN_HEIGHT = 700
 SCREEN_WIDTH = 1000
@@ -20,6 +21,7 @@ class Map():
         self.allies = []
         self.bullets = []
         self.bombs = []
+        self.pileOfGold = []
         self.level = 1
         self.quant = 1
         self.player = Player((500-70/2, 350-70/2), pygame.image.load('sprites_player/sprite1_player_0.png'))
@@ -45,7 +47,7 @@ class Map():
                             pygame.image.load('background_images/rocha.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
                             pygame.image.load('background_images/metal.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
                             pygame.image.load('background_images/rocha.png').convert_alpha()]
-        self.play =pygame.image.load('background_images/play.png')
+        self.play = pygame.image.load('background_images/play.png')
         self.pause = pygame.image.load('background_images/pause.png')
 
     def spawnMonsters(self, amount, image, life, isBoss):
@@ -61,6 +63,9 @@ class Map():
 
     def spawnBomb(self):
         self.bombs.append(Bomb((rd.randint(30, 900), rd.randint(30, 600))))
+
+    def spawnGold(self):
+        self.pileOfGold.append(Gold((rd.randint(30, 900), rd.randint(30, 600))))
 
     def spawnBoss(self):
         if self.level <= 5:
@@ -133,6 +138,7 @@ class Map():
             self.spawnMonsters(self.quant, self.images.getDevelingImages(), 7, False)
             
         if rd.random() > 0.65:
+            self.spawnGold()
             self.spawnAllies(1, self.images.getHeartImages(), 1)
             self.spawnBomb()
 
@@ -165,9 +171,20 @@ class Map():
         for bomb in self.bombs:
             bomb.drawBomb(self.screen)
             if self.player.is_collided_with(bomb):
-                print('collide')
                 self.bombs.remove(bomb)
                 pygame.mixer.Sound('audio/explosion.wav').play()
+
+    def goldInteractons(self):
+        for gold in self.pileOfGold:
+            gold.drawGold(self.screen)
+            if self.player.is_collided_with(gold):
+                self.player.addScore(250)
+                self.pileOfGold.remove(gold)
+                pygame.mixer.Sound('audio/gold.wav').play()
+            else:
+                for shot in self.player.shots:
+                    if shot.is_collided_with(gold):
+                        self.pileOfGold.remove(gold)
 
     def monstersInteractions(self):
         for monster in self.monsters:
