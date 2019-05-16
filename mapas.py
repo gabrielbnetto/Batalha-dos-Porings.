@@ -185,6 +185,7 @@ class Map():
                 for shot in self.player.shots:
                     if shot.is_collided_with(gold):
                         self.pileOfGold.remove(gold)
+                        self.player.shots.remove(shot)
 
     def monstersInteractions(self):
         for monster in self.monsters:
