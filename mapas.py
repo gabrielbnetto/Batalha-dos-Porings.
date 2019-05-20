@@ -44,9 +44,7 @@ class Map():
         self.initialBackgroundImage = pygame.image.load('background_images/initial.jpg')
         self.instructions = pygame.image.load('background_images/instructions.png')
         self.backgrounds = [pygame.image.load('background_images/deserto.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
-                            pygame.image.load('background_images/rocha.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
-                            pygame.image.load('background_images/metal.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
-                            pygame.image.load('background_images/rocha.png').convert_alpha()]
+                            pygame.image.load('background_images/rocha.png').convert_alpha(), pygame.image.load('background_images/floresta_escura.png').convert_alpha()]
         self.play = pygame.image.load('background_images/play.png')
         self.pause = pygame.image.load('background_images/pause.png')
 
@@ -76,12 +74,7 @@ class Map():
             self.spawnMonsters(1, self.images.changeImagesSize(self.images.getAngryPenguinImages(), (100, 100)), 30, True)
         elif self.level <= 20:
             self.spawnMonsters(1, self.images.changeImagesSize(self.images.getStapoImages(), (100, 100)), 40, True)
-        elif self.level <= 25:
-            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getMetallingImages(), (100, 100)), 50, True)
-        elif self.level <= 30:
-            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getMagmaringImages(), (100, 100)), 60, True)
-        elif self.level > 30:
-            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getDevelingImages(), (100, 100)), 70, True)
+        
         for i in range(3):
             del self.monsters[rd.randint(0, len(self.monsters)-1)]
         self.monsters[0].changeMonsterVelocity(3)
@@ -115,8 +108,17 @@ class Map():
 
     def changeLevel(self):
         self.level += 1
-        if self.level <= 35:
-            self.backgroundIndex = math.floor(self.level/5-0.1)
+        if self.level <= 5:
+            self.backgroundIndex = 0
+        elif self.level <= 10:
+            self.backgroundIndex = 1
+        elif self.level <= 15:
+            self.backgroundIndex = 2
+        elif self.level <= 20:
+            self.backgroundIndex = 3
+        else:
+            self.inGame = False
+            self.win = True
         self.quant += 1
         if (self.quant-1)%5 == 0:
             self.quant = 1
@@ -129,13 +131,7 @@ class Map():
         elif self.level <= 15:
             self.spawnMonsters(self.quant, self.images.getDevelingImages(), 3, False)
         elif self.level <= 20:
-            self.spawnMonsters(self.quant, self.images.getStapoImages(), 4, False)
-        elif self.level <= 25:
-            self.spawnMonsters(self.quant, self.images.getMetallingImages(), 5, False)
-        elif self.level <= 30:
-            self.spawnMonsters(self.quant, self.images.getMagmaringImages(), 6, False)
-        elif self.level > 30:
-            self.spawnMonsters(self.quant, self.images.getDevelingImages(), 7, False)
+            self.spawnMonsters(self.quant, self.images.getPoringImages(), 4, False)
             
         if rd.random() > 0.65:
             self.spawnGold()
