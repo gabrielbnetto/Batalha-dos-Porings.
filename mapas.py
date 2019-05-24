@@ -36,6 +36,7 @@ class Map():
         self.showGuiLevel = True
         self.ranking = []
         self.setRank = True
+        self.PauseMusic = False
         self.start_time = time.time()
         self.backgroundIndex = 0
         self.instrucStapoImage = 0
@@ -151,14 +152,15 @@ class Map():
         for allie in self.allies:
             allie.drawMonster(self.screen)
             if self.player.is_collided_with(allie):
-                allie.healAudio.play()
+                if self.PauseMusic == False:
+                    allie.healAudio.play()
                 self.player.healPlayer(1)
                 self.allies.remove(allie)
             else:
                 for shot in self.player.shots:
                     if shot.is_collided_with(allie):
                         allie.damageMonster(1)
-                        if allie.isDead():
+                        if allie.isDead(self.PauseMusic):
                             self.allies.remove(allie)
                             self.player.addScore(-500)
                         self.player.shots.remove(shot)
@@ -168,7 +170,8 @@ class Map():
             bomb.drawBomb(self.screen)
             if self.player.is_collided_with(bomb):
                 self.bombs.remove(bomb)
-                pygame.mixer.Sound('audio/explosion.wav').play()
+                if(self.PauseMusic == False):
+                    pygame.mixer.Sound('audio/explosion.wav').play()
 
     def goldInteractons(self):
         for gold in self.pileOfGold:
@@ -176,7 +179,8 @@ class Map():
             if self.player.is_collided_with(gold):
                 self.player.addScore(250)
                 self.pileOfGold.remove(gold)
-                pygame.mixer.Sound('audio/gold.wav').play()
+                if(self.PauseMusic == False):
+                    pygame.mixer.Sound('audio/gold.wav').play()
             else:
                 for shot in self.player.shots:
                     if shot.is_collided_with(gold):
@@ -189,7 +193,8 @@ class Map():
             monster.drawMonster(self.screen)
             monster.drawLifeBar(monster, self.screen)
             if self.player.is_collided_with(monster):
-                monster.damageAudio.play()
+                if self.PauseMusic == False:
+                    monster.damageAudio.play()
                 if monster.isBoss:
                     self.player.damagePlayer(5)
                 else:
@@ -201,7 +206,7 @@ class Map():
                 for shot in self.player.shots:
                     if shot.is_collided_with(monster):
                         monster.damageMonster(1)
-                        if monster.isDead():
+                        if monster.isDead(self.PauseMusic):
                             self.monsters.remove(monster)
                             self.player.addScore(100)
                         self.player.shots.remove(shot)
@@ -210,7 +215,8 @@ class Map():
         for bullet in self.bullets:
             self.screen.blit(bullet.img, bullet.position)
             if self.player.is_collided_with(bullet):
-                bullet.reloadAudio.play()
+                if(self.PauseMusic == False):
+                    bullet.reloadAudio.play()
                 self.player.addAmmo(5)
                 self.bullets.remove(bullet)
                 if len(self.bullets) == 0:
@@ -267,7 +273,9 @@ class Map():
                 pos = pygame.mouse.get_pos()
                 if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 680 and pos[1] <= 700):
                     self.pauseMusic()
+                    self.PauseMusic = True
                 if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
+                    self.PauseMusic = False
                     self.unpauseMusic()
 
     def checkEndOfLevel(self):
@@ -289,8 +297,10 @@ class Map():
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 680 and pos[1] <= 700):
+                    self.PauseMusic = True
                     self.pauseMusic()
                 if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
+                    self.PauseMusic = False
                     self.unpauseMusic()
                     
         if self.win:
@@ -334,8 +344,10 @@ class Map():
                     self.initialScreen = False
                     self.intructionsScreen = True
                 if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 650 and pos[1] <= 700):
+                    self.PauseMusic = True
                     self.pauseMusic()
                 if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
+                    self.PauseMusic = False
                     self.unpauseMusic()
 
     def instructionScreen(self):
@@ -358,5 +370,7 @@ class Map():
                     self.intructionsScreen = False
                 if(pos[0] >= 25 and pos[0] <= 45 and pos[1] >= 650 and pos[1] <= 700):
                     self.pauseMusic()
+                    self.PauseMusic = True
                 if(pos[0] >= 0 and pos[0] <= 20 and pos[1] >= 680 and pos[1] <= 700):
                     self.unpauseMusic()
+                    self.PauseMusic = False

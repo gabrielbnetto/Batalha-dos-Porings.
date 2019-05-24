@@ -66,8 +66,9 @@ class Monster():
             pygame.draw.rect(screen, (0,255,0), (monster.position[0]+5, monster.position[1]-12, (70*(monster.life/monster.initialLife) +1), 5))
 
 
-    def isDead(self):
+    def isDead(self, PauseMusic):
         if self.life <= 0:
-            self.dieAudio.play()
+            if(PauseMusic == False):
+                self.dieAudio.play()
             return True
         return False
