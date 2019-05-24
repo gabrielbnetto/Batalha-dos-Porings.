@@ -6,7 +6,7 @@ import Ranking
 import time
 from monstros import Monster
 from players import Player
-from images_handler import Images
+from imagens import Images
 from municao import Bullet
 from bombs import Bomb
 from ouro import Gold
