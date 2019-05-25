@@ -169,9 +169,21 @@ class Map():
         for bomb in self.bombs:
             bomb.drawBomb(self.screen)
             if self.player.is_collided_with(bomb):
-                self.bombs.remove(bomb)
-                if(self.PauseMusic == False):
+                if (self.PauseMusic == False):
                     pygame.mixer.Sound('audio/explosion.wav').play()
+                self.player.damagePlayer(5)
+                self.bombs.remove(bomb)
+                if(self.player.isPlayerDead()):
+                    self.inGame = False
+            else:
+                for shot in self.player.shots:
+                    if shot.is_collided_with(bomb):
+                        if (self.PauseMusic == False):
+                            pygame.mixer.Sound('audio/explosion.wav').play()
+                        self.bombs.remove(bomb)
+                        self.player.shots.remove(shot)
+
+
 
     def goldInteractons(self):
         for gold in self.pileOfGold:

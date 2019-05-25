@@ -47,7 +47,10 @@ class Player():
         self.setImage(image)
 
     def changeHeartImage(self):
-        self.heartImage = pygame.image.load('sprites_player/heartBar/heartBar_' + str(self.life) + '.png')
+        if 0 <= self.life <= 5:
+            self.heartImage = pygame.image.load('sprites_player/heartBar/heartBar_' + str(self.life) + '.png')
+        else:
+            self.heartImage = pygame.image.load('sprites_player/heartBar/heartBar_' + str(0) + '.png')
 
 
 
