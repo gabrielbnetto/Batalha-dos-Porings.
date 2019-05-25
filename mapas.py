@@ -74,7 +74,7 @@ class Map():
         elif self.level <= 15:
             self.spawnMonsters(1, self.images.changeImagesSize(self.images.getAngryPenguinImages(), (100, 100)), 30, True)
         elif self.level <= 20:
-            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getStapoImages(), (100, 100)), 40, True)
+            self.spawnMonsters(1, self.images.changeImagesSize(self.images.getKingPoringImages(), (100, 100)), 40, True)
         
         for i in range(3):
             del self.monsters[rd.randint(0, len(self.monsters)-1)]

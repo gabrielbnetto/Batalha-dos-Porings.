@@ -11,8 +11,8 @@ class Images():
         self.stapo = [[pygame.transform.scale(pygame.image.load('sprites_monsters/stapo/right/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(13)],
                       [pygame.transform.scale(pygame.image.load('sprites_monsters/stapo/left/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(13)]]
 
-        self.magmaring = [[pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/right/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(5)],
-                          [pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/left/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(5)]]
+        self.magmaring = [[pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(4)],
+                         [pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/left/frame_' + str(i) + '_delay-0.1s.png'),(80, 80)) for i in range(4)]]
 
         self.develing = [[pygame.transform.scale(pygame.image.load('sprites_monsters/develing/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(7)],
                          [pygame.transform.scale(pygame.image.load('sprites_monsters/develing/left/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(7)]]
@@ -25,6 +25,9 @@ class Images():
 
         self.angry_penguin = [[pygame.transform.scale(pygame.image.load('sprites_monsters/angry_penguin/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(9)],
                      [pygame.transform.scale(pygame.image.load('sprites_monsters/angry_penguin/left/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(9)]]
+
+        self.king_poring = [[pygame.transform.scale(pygame.image.load('sprites_monsters/king_poring/right/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(7)],
+                     [pygame.transform.scale(pygame.image.load('sprites_monsters/king_poring/left/frame_' + str(i) + '_delay-0.1s.png'), (80, 80)) for i in range(7)]]
 
 
     def getPoringImages(self):
@@ -60,6 +63,8 @@ class Images():
     def getAngryPenguinImages(self):
         return self.angry_penguin
 
+    def getKingPoringImages(self):
+        return self.king_poring
 
     def changeImagesSize(self, images, size):
         return [[pygame.transform.scale(images[0][i], size) for i in range(len(images[0]))], [pygame.transform.scale(images[1][i], size) for i in range(len(images[1]))]]
