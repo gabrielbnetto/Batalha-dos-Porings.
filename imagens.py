@@ -8,17 +8,8 @@ class Images():
 
         self.heart = [[pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (30,30))], [pygame.transform.scale(pygame.image.load('sprites_player/heart.png'), (30,30))]]
 
-        self.aquaring = [[pygame.transform.scale(pygame.image.load('sprites_monsters/aquaring/right/frame_' + str(i) + '_delay-0.1s.png'), (50, 50)) for i in range(9)],
-                         [pygame.transform.scale(pygame.image.load('sprites_monsters/aquaring/left/frame_' + str(i) + '_delay-0.1s.png'), (50, 50)) for i in range(9)]]
-        
-        self.poporing = [[pygame.transform.scale(pygame.image.load('sprites_monsters/poporing/right/frame_' + str(i) + '_delay-0.1s.png'), (40, 40)) for i in range(4)],
-                         [pygame.transform.scale(pygame.image.load('sprites_monsters/poporing/left/frame_' + str(i) + '_delay-0.1s.png'), (40, 40)) for i in range(4)]]
-
         self.stapo = [[pygame.transform.scale(pygame.image.load('sprites_monsters/stapo/right/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(13)],
                       [pygame.transform.scale(pygame.image.load('sprites_monsters/stapo/left/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(13)]]
-
-        self.metalling = [[pygame.transform.scale(pygame.image.load('sprites_monsters/metalling/right/frame_' + str(i) + '_delay-0.09s.png'), (50, 50)) for i in range(4)],
-                          [pygame.transform.scale(pygame.image.load('sprites_monsters/metalling/left/frame_' + str(i) + '_delay-0.09s.png'), (50, 50)) for i in range(4)]]
 
         self.magmaring = [[pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/right/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(5)],
                           [pygame.transform.scale(pygame.image.load('sprites_monsters/magmaring/left/frame_' + str(i) + '_delay-0.1s.png'), (60, 60)) for i in range(5)]]
