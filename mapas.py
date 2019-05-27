@@ -204,6 +204,13 @@ class Map():
             monster.move(self.player)
             monster.drawMonster(self.screen)
             monster.drawLifeBar(monster, self.screen)
+            if not monster.isBoss:
+                for bomb in self.bombs:
+                    if monster.is_collided_with(bomb):
+                        self.monsters.remove(monster)
+                        self.bombs.remove(bomb)
+                        if(self.PauseMusic == False):
+                            pygame.mixer.Sound('audio/explosion.wav').play()
             if self.player.is_collided_with(monster):
                 if self.PauseMusic == False:
                     monster.damageAudio.play()

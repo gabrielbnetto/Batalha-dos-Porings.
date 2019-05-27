@@ -57,6 +57,9 @@ class Monster():
         else:
             pass
 
+    def is_collided_with(self, sprite):
+        return self.rect.colliderect(sprite.rect)
+    
     def drawLifeBar(self, monster, screen):
         if monster.isBoss == False:
             pygame.draw.rect(screen, (255, 0, 0), (monster.position[0]+5, monster.position[1]-10, 30, 5))
